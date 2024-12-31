@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanishka❤️Sharad</title>
+	<link href="image5.jpg" rel="shortcut icon" type="image/x-icon">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@300;500&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: black;
+            color: rgba(255, 255, 255, 0.9);
+            overflow: hidden;
+        }
+
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .background img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: fade 24s infinite;
+        }
+
+        
+
+      
+
+        .date {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 120px;
+            height: 120px;
+            background: teal;
+            border-radius: 50%;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .date .day {
+            font-size: 2.4rem;
+            font-weight: bold;
+        }
+
+        .date .month {
+            font-size: 1rem;
+            text-transform: uppercase;
+        }
+
+        .date .year {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .quote {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin: 20px 0;
+        }
+
+        .motivation {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            max-width: 90%;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+        }
+
+        @media (max-width: 768px) {
+            .date {
+                width: 100px;
+                height: 100px;
+            }
+
+            .date .day {
+                font-size: 2rem;
+            }
+
+            .date .month {
+                font-size: 0.9rem;
+            }
+
+            .date .year {
+                font-size: 0.8rem;
+            }
+
+            .quote {
+                font-size: 2rem;
+            }
+
+            .motivation {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <div class="background">
+        <img src="image1.jpg" alt="Background Image">
+    </div>
+
+    <div class="date">
+        <div class="day" id="day"></div>
+        <div class="month" id="month"></div>
+        <div class="year" id="year"></div>
+    </div>
+
+    <div class="content">
+        <div class="quote" id="quote"></div>
+    </div>
+
+    <div class="motivation" id="motivation"></div>
+
+    <script>
+const messages = ["With the start of this year, I promise to love you more every day. 💖✨",
+"Your love gives me strength to conquer anything. 💪❤️",
+"Together, we’re building a future that’s as beautiful as your heart. 🏡💓",
+"I’m grateful for the happiness you bring into my life. 😊💞",
+"Every sunrise reminds me how lucky I am to have you. 🌅💖",
+"Your love is my biggest source of motivation. 🌟💕",
+"Let’s make this year full of laughter and success. 😂🏆",
+"You are my peace in a chaotic world. 🌸🕊️",
+"Our bond is the foundation of my dreams. 🛠️💭",
+"Loving you is the easiest thing I’ve ever done. 💗😊",
+"Your support makes me fearless in the face of challenges. 🛡️❤️",
+"I can’t wait to make more memories with you this year. 📸💞",
+"Together, we’ll turn every obstacle into an opportunity. 🚧➡️🌈",
+"My love for you grows stronger with every passing day. 🌹❤️",
+"Your smile brightens my darkest days. 🌞😊",
+"Every day is an adventure with you by my side. 🌍🧭",
+"You inspire me to reach for the stars. 🌌🌟",
+"Your belief in me makes me believe in myself. 🙌❤️",
+"Kanishka, you’re my safe place and my greatest joy. 🏡💕",
+"You are the reason my life feels so fulfilling. ✨💖",
+"Every moment spent with you feels like a blessing. 🌈🙏",
+"Our love is the masterpiece of my life. 🎨❤️",
+"I cherish every memory we’ve created together. 📸💖",
+"With you, I feel like I can achieve anything. 🏆❤️",
+"Let’s dream big and make those dreams a reality. 🌟🌈",
+"Your love is my compass in life’s journey. 🧭❤️",
+"You’re not just my girlfriend; you’re my partner in everything. 💑✨",
+"I love you more with every passing second. ⏳❤️",
+"Let’s build a life we’re both proud of. 🏡💞",
+"Your happiness is my top priority. 😊💓",
+"I’m so lucky to call you mine. 🍀💖",
+"Every day with you feels like a celebration of love. 🎉❤️",
+"You are my greatest blessing, Kanishka. 🙏💖",
+"Your love fills my life with endless joy. 🌟💕",
+"I’m so proud of the bond we’ve built together. 🛠️❤️",
+"Loving you is my life’s greatest privilege. 🏆💓",
+"Let’s continue to grow together and make our dreams come true. 🌱🌈",
+"You make my world brighter with just your presence. 🌞❤️",
+"With you, life feels like a beautiful journey. 🚶‍♀️💕",
+"I cherish the way you love and support me. 💖🙌",
+"You are the heartbeat of my existence. ❤️✨",
+"Your love gives my life meaning and purpose. 🌟❤️",
+"Together, we are unstoppable. 🚀❤️",
+"I can’t wait to celebrate Valentine’s Day with you! 💘🎉",
+"Happy Valentine’s Day, my love. You’re my forever. ❤️🌹",
+"You’re the greatest gift life has ever given me. 🎁💕",
+"Your love is my greatest source of joy. 🌸💖",
+"Kanishka, you make every moment magical. ✨❤️",
+"Thank you for being my biggest supporter. 🙌💖",
+"Your love is my constant in an ever-changing world. 🌍❤️",
+"I’m grateful for the beautiful love we share. 🌹💞",
+"Happy anniversary, my love. Nine years and counting! 🎉💕",
+"Every day, I fall more in love with you. 💕💓",
+"Let’s make this year unforgettable, together. 🌟💖",
+"You are the reason I believe in miracles. ✨💕",
+"With you, even the ordinary feels extraordinary. 🌸❤️",
+"I love you for everything you are and everything you inspire me to be. 💓🌟",
+"Kanishka, you are my world, my life, my love. 🌎❤️",
+"Thank you for being the most amazing partner. 🌟💖",
+"Your love feels like the first bloom of spring—full of life and hope. 🌼💓",
+"Together, we’ll build a future that’s nothing short of extraordinary. 🏡🌟",
+"Your love is my greatest inspiration. 🌸💖",
+"I’m so proud of the life we’re creating together. 🏡💓",
+"You are the reason my world is so full of happiness. 🌅❤️",
+"Every day with you is a gift I treasure. 🎁💓",
+"Let’s face every challenge together and come out stronger. 💪❤️",
+"Your kindness and love make my life complete. 🌸💖",
+"Kanishka, you make everything better just by being you. 🌟💓",
+"Your love is my greatest strength. 💪❤️",
+"Let’s dream big and achieve greatness together. 🌈🏆",
+"With you, life is an endless adventure. 🌍💞",
+"Thank you for being my partner in everything. 🙌💕",
+"I’m so lucky to have you in my life. 🍀❤️",
+"You inspire me to be the best version of myself. 🌟💖",
+"I love you more than words can ever express. ❤️✨",
+"You are the light that guides me through life. 🌟❤️",
+"Your love fills my heart with endless joy. 💓🌸",
+"Together, we’ll make this year unforgettable. 🎉💞",
+"Kanishka, you are my soulmate, my partner, my everything. ❤️✨",
+"I’ll always cherish the love we share. 💕💖",
+"Your happiness is the most important thing to me. 😊💓",
+"I can’t wait to see what the future holds for us. 🌅💖",
+"Let’s keep building our dreams together. 🌟🏡",
+"Your love is my anchor in life’s storms. ⚓❤️",
+"I’m so grateful for the beautiful bond we share. 🌹💕",
+"Every day, I’m reminded of how lucky I am to have you. 🍀❤️",
+"You are my dream come true. ✨💕",
+"Together, we’ll create a lifetime of happiness. 💓🌟",
+"I love you more with each passing day. 💕💓",
+"Let’s make every moment count this year. ⏳❤️",
+"The beauty of spring reminds me of the beauty in our love. 🌸💓",
+"Kanishka, you are my sunshine after every storm. 🌞❤️",
+"Together, we are writing a love story that will stand the test of time. 📖💖",
+"Your love is the foundation of all my hopes and dreams. 🏡💕",
+"I promise to be your biggest supporter every step of the way. 🙌💓",
+"You make every day feel like a celebration of life. 🎉❤️",
+"Your smile has the power to brighten even the gloomiest days. 😊🌞",
+"Every day with you feels like a new adventure. 🗺️💕",
+"I cherish the little moments that make our bond so special. 💓📸",
+"With you, I feel complete and unconditionally loved. 💖✨",
+"Your love is my greatest treasure in this lifetime. 💎❤️",
+"Let’s continue to build a life full of joy and success together. 🌟🏡",
+"You inspire me to aim higher and dream bigger. 🚀💓",
+"I love how we make each other better every day. 💪💕",
+"Your love is my constant source of happiness. 🌸💖",
+"I’m so thankful for your presence in my life. 🙏❤️",
+"Together, we can face any challenge and conquer it. 💪✨",
+"You are my home, my heart, and my greatest comfort. 🏡💕",
+"Every day, I’m reminded of how much I love you. ❤️✨",
+"Let’s continue to grow and evolve together. 🌱💕",
+"Your laughter is the sweetest music to my ears. 🎶💖",
+"I’m so proud of the strong and beautiful person you are. 🌟💕",
+"Kanishka, you are my greatest blessing. 🙌💓",
+"I love the way we dream, plan, and achieve as a team. 🚀❤️",
+"Your love gives me courage to chase my dreams. 🌟💪",
+"Every moment with you is a moment to be cherished. 📸💖",
+"Let’s make this month as magical as your presence in my life. ✨💕",
+"Thank you for always believing in us. 🙏❤️",
+"Your love is the greatest gift I could ever ask for. 🎁💖",
+"Together, we’ll create memories to last a lifetime. 🗓️💓",
+"The warmth of summer reminds me of the warmth in your love. 🌞💕",
+"You are the anchor that keeps me grounded and strong. ⚓❤️",
+"With you, every season feels like a season of love. 🌸💕",
+"Your love gives me strength to conquer the toughest days. 💪❤️",
+"I’m so grateful for the way you love and support me. 🌟💓",
+"Your happiness is my top priority, always. 😊❤️",
+"Let’s make this month another step toward our beautiful future. 🚀💕",
+"I admire your resilience and strength every single day. 💪💖",
+"You make life’s journey so much more meaningful. 🛤️💓",
+"Kanishka, you are my biggest inspiration. 🌟💕",
+"Your love fills my heart with boundless joy. 🌈❤️",
+"I’ll always stand by you, no matter what. 🛡️💕",
+"Let’s create moments this month that we’ll treasure forever. 📸💓",
+"You are the reason my world feels so bright. 🌞💕",
+"I can’t imagine a life without your love and support. 💖✨",
+"Together, we can achieve anything we set our minds to. 🚀❤️",
+"You are my partner, my teammate, and my everything. 🤝💕",
+"Thank you for bringing so much joy into my life. 🎉💖",
+"I’m so proud of the life we’re building together. 🏡💕",
+"Every day, I fall more in love with you. 🌟❤️",
+"Your love is my guiding star in life. 🌟💕",
+"I promise to cherish you forever, Kanishka. 💖✨",
+"Let’s make this month another chapter of our beautiful story. 📖❤️",
+"Your dreams are my dreams, and your goals are my goals. 🌈💕",
+"You make my heart feel at home. 🏡💓",
+"I’m so thankful for every moment we share together. 🙏❤️",
+"With you, even the ordinary becomes extraordinary. ✨💕",
+"Your love inspires me to be the best version of myself. 🌟💓",
+"You are my rock, my soulmate, and my greatest blessing. 💎❤️",
+"I’ll always love you, through every season and every challenge. 🌸💖",
+"Thank you for being the light of my life. 🌟💕",
+"Summer blooms remind me of the way your love brightens my world. 🌺❤️",
+"Kanishka, you are my sunshine in every season. 🌞💕",
+"Together, we’ll continue to build a future filled with joy and success. 🏡🌟",
+"Your love gives me strength to face any challenge. 💪💕",
+"I cherish every moment spent with you. 🌈💖",
+"You are my greatest motivation to be better every day. 🚀💕",
+"Your smile is the most beautiful sight in the world. 😊❤️",
+"I love the way you support and believe in me. 🌟💖",
+"Together, we’ll turn our dreams into reality. 🌈❤️",
+"You are the love of my life, Kanishka. 💓✨",
+"Thank you for being my constant source of strength. 🙌💕",
+"Your love is the reason I believe in magic. ✨❤️",
+"I promise to always stand by your side, no matter what. 🛡️💓",
+"Every moment with you feels like a moment of joy. 🌈💕",
+"I’m so proud of everything we’ve accomplished together. 💪❤️",
+"Kanishka, you make my world complete. 🌏💓",
+"I can’t wait to create more memories with you this month. 📸💕",
+"You are the reason my heart feels so full of happiness. 😊❤️",
+"Together, we’ll continue to grow and thrive. 🌱💖",
+"Your love is my greatest treasure in this lifetime. 💎💕",
+"I’ll always cherish the beautiful bond we share. ✨❤️",
+"Let’s make this month a month of love and laughter. 🌈💕",
+"You inspire me to be the best version of myself. 🌟💖",
+"Your love gives my life meaning and purpose. 🌟💕",
+"Thank you for being my partner in everything. 🤝❤️",
+"With you, every day feels like a dream come true. 🌈💓",
+"I’m so lucky to have you as my soulmate. 🍀💕",
+"Together, we’ll create a lifetime of happiness. 🎉❤️",
+"You are my rock, my love, and my greatest blessing. 💎💓",
+"Let’s make this summer unforgettable, together. 🌞💕",
+"The warmth of July reminds me of the warmth your love brings to my heart. 🌅❤️",
+"Together, we’ll make this month as special as our bond. 🌟💖",
+"Your love is the greatest adventure of my life. 🚀💕",
+"Every moment with you is a treasure I hold close. 💎💓",
+"Kanishka, your happiness is my greatest reward. 🙌💕",
+"I promise to always be your biggest supporter. 🛡️❤️",
+"Your love makes my world a better place. 🌍💕",
+"Together, we’ll turn even the ordinary into something extraordinary. 🌟❤️",
+"You inspire me to achieve greatness, every single day. 🚀💕",
+"Kanishka, you are my sunshine and my serenity. 🌞💖",
+"Your smile is the light that brightens my darkest days. 🌟💕",
+"Every day, I’m thankful for the beautiful love we share. 🌸❤️",
+"Let’s make this month a celebration of all that we’ve built together. 🎉💓",
+"Your love is my constant in an ever-changing world. 🌍💕",
+"I’m proud of us and everything we’ve accomplished. 💪❤️",
+"With you, I feel invincible and at peace. 🌟💖",
+"Kanishka, you are my home, my heart, and my joy. 🏡💕",
+"Together, we’ll continue to build a future filled with love. 🌈❤️",
+"I’m grateful for every moment I get to spend with you. 🌸💖",
+"Your love makes every day feel like a gift. 🎁💕",
+"You are my soulmate, my partner, and my everything. 🌟❤️",
+"I promise to always cherish and protect our love. 🛡️💕",
+"Let’s create memories this month that will last a lifetime. 📸💓",
+"Your love gives me courage to face every challenge. 💪❤️",
+"You make my life feel so incredibly meaningful. 🌟💕",
+"Kanishka, you are the best part of my world. 🌍❤️",
+"Every day, I love you more than I did the day before. 💖✨",
+"With you, life feels like a never-ending adventure. 🚀💕",
+"Your love is the most beautiful thing I’ve ever experienced. 🌟❤️",
+"Let’s dream big and achieve those dreams together. 🌈💓",
+"Thank you for being my forever love. 🌟💕",
+"The start of August reminds me how blessed I am to have you. 🌸❤️",
+"Together, we’ll make this month unforgettable. 🎉💖",
+"Kanishka, you are the reason my heart feels so full. 😊💕",
+"Your love is the best gift life has ever given me. 🎁❤️",
+"Let’s celebrate our bond and the dreams we share. 🌈💓",
+"Your support means the world to me, always. 🙌💕",
+"You are my light and my greatest inspiration. 🌟❤️",
+"Every day with you feels like a celebration of life. 🎉💓",
+"Your love is my guiding star in everything I do. 🌟💕",
+"Kanishka, I’m so lucky to call you mine. 🍀❤️",
+"I promise to cherish and nurture our love forever. 🌸💕",
+"Your dreams are my dreams, and I’ll always support them. 🌟❤️",
+"With you, life feels like a beautiful journey. 🛤️💓",
+"I’m grateful for the love and laughter you bring into my life. 🎉💕",
+"Your happiness is my greatest joy. 😊❤️",
+"Every day, I’m reminded of how much I love you. 💖✨",
+"Let’s make this month another chapter in our beautiful story. 📖💕",
+"You make my world brighter with just your presence. 🌞❤️",
+"I’m so proud of the bond we’ve built together. 🌟💓",
+"Your love gives my life meaning and purpose. 🌸💕",
+"Happy birthday month to me—made special because of you! 🎂❤️",
+"Your love is the reason I believe in miracles. 🌟💓",
+"Together, we’ll continue to create memories to cherish forever. 📸💕",
+"Your laughter is the sweetest sound in my world. 🎶❤️",
+"You inspire me to be the best version of myself. 🌟💖",
+"Every moment spent with you feels like a blessing. 🌈💕",
+"You are my greatest treasure in this lifetime. 💎❤️",
+"Let’s build a future that’s as beautiful as your heart. 🏡💕",
+"Your love gives me the courage to face every challenge. 💪❤️",
+"Thank you for making every day so special. 🙏💖",
+"I’m excited to celebrate my birthday with you by my side. 🎂💕",
+"September feels magical because of the love we share. 🌟❤️",
+"Together, we’ll make this month a celebration of us. 🎉💓",
+"Your love fills my heart with boundless joy. 🌈💕",
+"Kanishka, you are my anchor and my greatest strength. ⚓❤️",
+"Your kindness makes my world so much brighter. 🌸💕",
+"Every day, I’m reminded of how blessed I am to have you. 🍀❤️",
+"Let’s dream big and work toward those dreams together. 🌈💕",
+"Your happiness is my top priority, always. 😊❤️",
+"You make even the smallest moments feel extraordinary. 🌟💖",
+"I’m proud of everything we’ve accomplished as a team. 🚀💕",
+"Your love is my constant source of motivation. 🌸❤️",
+"Kanishka, you make every day worth celebrating. 🎉💕",
+"Together, we’ll continue to create a life full of happiness. 🌟❤️",
+"Your love gives my life meaning and purpose. 🌈💕",
+"I’m grateful for the strength and resilience we share. 💪❤️",
+"You inspire me to achieve greatness every single day. 🚀💕",
+"Every moment with you is a moment I treasure. 🌟❤️",
+"I promise to always stand by your side, no matter what. 🛡️💕",
+"Let’s continue to build a future filled with love and laughter. 🌸❤️",
+"Your support is the reason I believe in myself. 🌟💕",
+"Kanishka, you are my soulmate, my partner, and my forever. 💖✨",
+"Together, we’ll turn every challenge into an opportunity. 🚧➡️🌟",
+"Your love makes my world a better place. 🌍💕",
+"Every day with you feels like a new adventure. 🗺️❤️",
+"I cherish the bond we’ve built over the years. 🌟💓",
+"Your laughter is the most beautiful sound to my ears. 🎶💕",
+"I’m so thankful for the love we share. 🙏❤️",
+"You are my heart, my home, and my everything. 🏡💓",
+"Let’s continue to create memories that we’ll cherish forever. 📸💕",
+"Your love is my greatest source of happiness. 🌸❤️",
+"October’s calm reminds me of the peace your love brings to my heart. 🍂💕",
+"Together, we’ll make this month as beautiful as our journey together. 🌅❤️",
+"Your love is the light that guides me through life’s challenges. 🌟💕",
+"Kanishka, you are my greatest strength and my greatest joy. 💪❤️",
+"Every day, I’m reminded of how lucky I am to have you. 🍀💕",
+"Your love fills my life with endless warmth and happiness. 🌟❤️",
+"Let’s make this month another chapter of our beautiful story. 📖💕",
+"I’m so proud of the life we’re building together. 🏡❤️",
+"Your love inspires me to be the best version of myself. 🌟💓",
+"You are the reason my world feels so magical. ✨💕",
+"Together, we’ll continue to grow and thrive in love. 🌱❤️",
+"Kanishka, you are my partner in all things, big and small. 🤝💕",
+"Your happiness is my biggest goal every single day. 😊❤️",
+"I’ll always cherish the bond we’ve built over the years. 💓✨",
+"Your love gives my life purpose and meaning. 🌟❤️",
+"Every moment with you feels like a dream come true. 🌈💕",
+"You are my rock, my heart, and my everything. 🏔️❤️",
+"Let’s create memories this month that we’ll hold close forever. 📸💕",
+"Your love makes every day feel like a celebration. 🎉💓",
+"Thank you for being my greatest blessing in life. 🙏❤️",
+"Kanishka, your love is my greatest treasure. 🌟💖",
+"I promise to always stand by your side, no matter what. 🛡️💕",
+"Together, we’ll overcome every challenge life throws our way. 🚀❤️",
+"Your love gives me the courage to chase my dreams. 🌟✨",
+"You make my life feel so full and meaningful. 💓🌍",
+"I’m so grateful for every moment we share together. 🙏💕",
+"With you, life feels like a beautiful journey worth cherishing. 🚶‍♀️💖",
+"Your love is the reason I believe in forever. ✨💕",
+"Let’s continue to grow stronger, hand in hand. 🤝❤️",
+"You are my inspiration, my strength, and my soulmate. 🌟💖",
+"Every day with you is a blessing I treasure deeply. 🙏💕",
+"November’s cool breeze reminds me of how refreshing your love feels. 🍂❤️",
+"Together, we’ll make this month a celebration of our bond. 🎉💖",
+"Your love gives me hope and strength to face anything. 💪💕",
+"Kanishka, you make my world feel complete. 🌍❤️",
+"Every moment spent with you is a moment I cherish forever. 🌟💓",
+"Your love fills my life with endless joy and warmth. 🌞💕",
+"I’m grateful for the laughter and love we share. 😂💖",
+"Together, we’ll create a lifetime of beautiful memories. 📸✨",
+"Your kindness inspires me every single day. 🌸💕",
+"Kanishka, you are my light in the darkest of times. 🌟❤️",
+"I promise to always love and support you, no matter what. 🛡️💖",
+"Your love makes every day feel like a celebration. 🎉💕",
+"You are the reason I believe in the power of love. ✨❤️",
+"Let’s make this month another chapter in our love story. 📖💕",
+"Your love gives me the strength to dream and achieve. 🌟❤️",
+"I’ll always stand by you, through every season of life. 🍂🌸❤️",
+"Together, we’ll continue to build a future filled with happiness. 🌈💕",
+"You are my greatest inspiration and my greatest joy. 🌟💖",
+"Kanishka, you make my life feel so magical and meaningful. ✨💕",
+"Every day with you is a gift I’m grateful for. 🎁❤️",
+"Your love is my greatest motivation to be better. 🌟💕",
+"Thank you for being the best partner I could ever ask for. 🙏❤️",
+"Let’s celebrate our love and all the moments we’ve shared. 🎉💖",
+"Your laughter is the sweetest music to my ears. 🎶💕",
+"I’m so proud of the love and life we’ve built together. 🏡❤️",
+"Together, we’ll overcome every challenge and thrive. 🚀💖",
+"Kanishka, you are my soulmate, my partner, and my forever. 🌟💕",
+"Your love is the reason I look forward to every day. ✨❤️",
+"Let’s dream big and achieve those dreams together. 🌈💓",
+"Thank you for being my rock, my heart, and my home. 🏔️💖",
+"December feels magical because of the love we share. ✨🎄❤️",
+"Together, we’ll make this month as beautiful as your heart. 🌟💓",
+"Kanishka, you are my greatest blessing and my greatest joy. 🙏💕",
+"Every day, I’m reminded of how much I love you. 💖✨",
+"Your love fills my life with endless warmth and happiness. 🌞💕",
+"I’m grateful for the memories we’ve created this year. 📸❤️",
+"Let’s end this year on a note of love and laughter. 🎉💖",
+"Your kindness and love inspire me to be a better person. 🌸💕",
+"Thank you for being my partner in everything. 🤝❤️",
+"Kanishka, you are the light of my life. 🌟💕",
+"Together, we’ll continue to grow stronger in love. 🌱❤️",
+"Your love is my constant source of joy and comfort. 🌟💕",
+"Every moment with you is a moment I treasure deeply. 🙏❤️",
+"I’m so proud of the love and life we’ve built together. 🏡💖",
+"Your happiness is my greatest priority every single day. 😊💕",
+"Kanishka, Happy birthday baby girl. 🎂❤️",
+"I promise to always cherish and nurture our love. 💓✨",
+"Together, we’ll turn every challenge into an opportunity. 🚧➡️🌟",
+"Let’s make this holiday season as magical as our bond. 🎄❤️",
+"Your love is the reason my world feels so bright. 🌟💕",
+"Your laughter makes my heart feel at home. 🎶💖",
+"I’m so thankful for the love we share. 🙏💕",
+"Every day with you feels like a celebration of life. 🎉❤️",
+"Your love gives my life purpose and meaning. 🌟💕",
+"I’m so lucky to call you mine, Kanishka. 🍀❤️",
+"Let’s welcome the new year with love and excitement. 🎉✨",
+"In just few days we will be counting the days for our marriage. 🎂💕",
+"You are the reason my world feels so magical and complete. ✨❤️",
+"Thank you for being my everything, Kanishka. 🌟💕",
+"Together, we’ll continue to build a beautiful life. 🏡❤️",
+"You are my love, my partner, and my forever. Here’s to another incredible year together! ❤️✨","leap"];
+
+        const motivationalQuotes = [
+  "Believe in yourself and all that you are.",
+  "The harder you work for something, the greater you'll feel when you achieve it.",
+  "Don't watch the clock; do what it does. Keep going.",
+  "Success is not final, failure is not fatal: It is the courage to continue that counts.",
+  "Don't be afraid to give up the good to go for the great.",
+  "Dream big and dare to fail.",
+  "Act as if what you do makes a difference. It does.",
+  "Success is walking from failure to failure with no loss of enthusiasm.",
+  "Your time is limited, so don't waste it living someone else's life.",
+  "If you can dream it, you can do it.",
+  "Hardships often prepare ordinary people for an extraordinary destiny.",
+  "You define your own life. Don’t let other people write your script.",
+  "The only way to achieve the impossible is to believe it is possible.",
+  "You miss 100% of the shots you don't take.",
+  "Start where you are. Use what you have. Do what you can.",
+  "Keep your face always toward the sunshine—and shadows will fall behind you.",
+  "Believe you can and you're halfway there.",
+  "It always seems impossible until it’s done.",
+  "Do what you can, with what you have, where you are.",
+  "The future depends on what you do today.",
+  "Happiness is not by chance, but by choice.",
+  "You are never too old to set another goal or to dream a new dream.",
+  "Limit your ‘always’ and your ‘nevers.’",
+  "Nothing is impossible. The word itself says ‘I’m possible!’",
+  "Everything you’ve ever wanted is on the other side of fear.",
+  "Success usually comes to those who are too busy to be looking for it.",
+  "Opportunities don't happen. You create them.",
+  "What you get by achieving your goals is not as important as what you become by achieving your goals.",
+  "Don’t wait for opportunity. Create it.",
+  "The way to get started is to quit talking and begin doing.",
+  "Don’t let yesterday take up too much of today.",
+  "It’s not whether you get knocked down; it’s whether you get up.",
+  "Failure will never overtake me if my determination to succeed is strong enough.",
+  "We may encounter many defeats but we must not be defeated.",
+  "Knowing is not enough; we must apply. Wishing is not enough; we must do.",
+  "The only limit to our realization of tomorrow will be our doubts of today.",
+  "Do something today that your future self will thank you for.",
+  "Perseverance is not a long race; it is many short races one after the other.",
+  "Don’t be pushed around by the fears in your mind. Be led by the dreams in your heart.",
+  "You don’t have to be great to start, but you have to start to be great.",
+  "Be the change that you wish to see in the world.",
+  "In the middle of every difficulty lies opportunity.",
+  "Hustle in silence and let your success make the noise.",
+  "If you want to fly, give up everything that weighs you down.",
+  "Do what you love and the money will follow.",
+  "Don’t limit your challenges; challenge your limits.",
+  "It’s going to be hard, but hard does not mean impossible.",
+  "If you're going through hell, keep going.",
+  "Don’t stop when you’re tired. Stop when you’re done.",
+  "Dream it. Wish it. Do it.",
+  "Small progress is still progress.",
+  "You are braver than you believe, stronger than you seem, and smarter than you think.",
+  "Focus on being productive instead of busy.",
+  "A year from now you may wish you had started today.",
+  "The difference between ordinary and extraordinary is that little extra.",
+  "It is never too late to be what you might have been.",
+  "Strength doesn’t come from what you can do. It comes from overcoming the things you once thought you couldn’t.",
+  "Work hard in silence, let success be your noise.",
+  "The best way to predict the future is to create it.",
+  "Strive not to be a success, but rather to be of value.",
+  "Everything you can imagine is real.",
+  "Do not wait to strike till the iron is hot; but make it hot by striking.",
+  "Challenges are what make life interesting and overcoming them is what makes life meaningful.",
+  "Don’t let the fear of losing be greater than the excitement of winning.",
+  "Don’t count the days; make the days count.",
+  "Be so good they can’t ignore you.",
+  "Success is getting what you want. Happiness is wanting what you get.",
+  "The best time to plant a tree was 20 years ago. The second-best time is now.",
+  "Success doesn’t just find you. You have to go out and get it.",
+  "The man who moves a mountain begins by carrying away small stones.",
+  "Do one thing every day that scares you.",
+  "Dream bigger. Do bigger.",
+  "Don’t be afraid to stand for what you believe in, even if that means standing alone.",
+  "Be a voice, not an echo.",
+  "Don’t be afraid to start over. It’s a chance to build something better this time.",
+  "Go the extra mile; it’s never crowded.",
+  "You only fail when you stop trying.",
+  "Believe in your infinite potential. Your only limitations are those you set upon yourself.",
+  "Push yourself because no one else is going to do it for you.",
+  "When you feel like quitting, think about why you started.",
+  "Don’t let small minds convince you that your dreams are too big.",
+  "Sometimes we’re tested not to show our weaknesses, but to discover our strengths.",
+  "Life is not about waiting for the storm to pass but learning how to dance in the rain.",
+  "Your limitation—it’s only your imagination.",
+  "No matter how you feel, get up, dress up, show up, and never give up.",
+  "Don’t be afraid to go out on a limb—that’s where the fruit is.",
+  "Discipline is the bridge between goals and accomplishment.",
+  "Stay positive. Better days are on their way.",
+  "Let your dreams be bigger than your fears and your actions louder than your words.",
+  "Every accomplishment starts with the decision to try.",
+  "Don’t let the noise of others’ opinions drown out your inner voice.",
+  "Make today so awesome that yesterday gets jealous.",
+  "Life is too short to wait.",
+  "You don’t always need a plan. Sometimes you just need to breathe, trust, let go, and see what happens.",
+  "A little progress each day adds up to big results.",
+  "The only way to do great work is to love what you do.",
+  "Be fearless in the pursuit of what sets your soul on fire.",
+  "Sometimes later becomes never. Do it now.",
+  "You don’t find willpower. You create it.",
+  "Life is what happens when you're busy making other plans.",
+  "Turn your wounds into wisdom.",
+  "If you want something you've never had, you must be willing to do something you've never done.",
+  "Don’t ruin a good today by thinking about a bad yesterday.",
+  "Stay away from negative people. They have a problem for every solution.",
+  "Never regret a day in your life: good days give happiness, bad days give experience.",
+  "A winner is a dreamer who never gives up.",
+  "Do what is right, not what is easy.",
+  "Make your life a masterpiece; imagine no limitations on what you can be, have, or do.",
+  "The secret of getting ahead is getting started.",
+  "Don’t compare your chapter one to someone else’s chapter twenty.",
+  "Stay committed to your decisions, but stay flexible in your approach.",
+  "Don’t downgrade your dream just to fit your reality. Upgrade your conviction to match your destiny.",
+  "You didn’t come this far to only come this far.",
+  "It’s not about being the best. It’s about being better than you were yesterday.",
+  "Focus on the step in front of you, not the whole staircase.",
+  "Your speed doesn’t matter. Forward is forward.",
+  "You are capable of amazing things.",
+  "It’s never too late to be proud of yourself.",
+  "Turn your can’ts into cans and your dreams into plans.",
+  "Great things are done by a series of small things brought together.",
+  "The road to success is always under construction.",
+  "Take the risk or lose the chance.",
+  "A smooth sea never made a skilled sailor.",
+  "Don’t stop until you’re proud.",
+  "The struggle you’re in today is developing the strength you need for tomorrow.",
+  "With the new day comes new strength and new thoughts.",
+  "Never bend your head. Always hold it high.",
+  "If you stumble, make it part of the dance.",
+  "The only way to achieve the impossible is to believe it is possible.",
+  "You’ve got to get up every morning with determination if you’re going to go to bed with satisfaction.",
+  "Do it with passion or not at all.",
+  "You can, and you will.",
+  "Learn as if you’ll live forever, live as if you’ll die tomorrow.",
+  "It doesn’t matter how slowly you go as long as you do not stop.",
+  "Life isn’t about finding yourself. It’s about creating yourself.",
+  "Your dreams don’t work unless you do.",
+  "Quit talking. Begin doing.",
+  "What feels like the end is often the beginning.",
+  "Don’t let perfection be the enemy of progress.",
+  "You’ve survived 100% of your worst days. Keep going.",
+  "Courage doesn’t always roar. Sometimes it’s the quiet voice at the end of the day saying, ‘I will try again tomorrow.’",
+  "Success is not how high you’ve climbed, but how you make a positive difference to the world.",
+  "Wake up with determination. Go to bed with satisfaction.",
+  "Be stubborn about your goals and flexible about your methods.",
+  "Failure is the opportunity to begin again, this time more intelligently.",
+  "Don’t just aspire to make a living. Aspire to make a difference.",
+  "Your life does not get better by chance. It gets better by change.",
+  "The only person you are destined to become is the person you decide to be.",
+  "Do what you have to do until you can do what you want to do.",
+  "When obstacles arise, change your direction to reach your goal; do not change your decision to get there.",
+  "Find a reason to smile every day.",
+  "Life is tough, but so are you.",
+  "Happiness is not something ready-made. It comes from your own actions.",
+  "Success doesn’t come from what you do occasionally; it comes from what you do consistently.",
+  "Never let a bad situation bring out the worst in you. Be strong and choose to be positive.",
+  "Every next level of your life will demand a different version of you.",
+  "Keep your eyes on the stars and your feet on the ground.",
+  "Do something every day that brings you closer to your goals.",
+  "If you want to achieve greatness, stop asking for permission.",
+  "Energy and persistence conquer all things.",
+  "Good things come to those who believe, better things come to those who are patient, and the best things come to those who don’t give up.",
+  "Your greatest risk is in not taking one.",
+  "Be somebody who makes everybody feel like a somebody.",
+  "If the plan doesn’t work, change the plan but never the goal.",
+  "Be happy with what you have while working for what you want.",
+  "A positive mindset brings positive things.",
+  "Don’t be afraid to fail. Be afraid not to try.",
+  "Start each day with a grateful heart.",
+  "Go confidently in the direction of your dreams. Live the life you have imagined.",
+  "Your passion is waiting for your courage to catch up.",
+  "The best view comes after the hardest climb.",
+  "Today is your opportunity to build the tomorrow you want.",
+  "You have the power to create the life you desire.",
+  "Don’t limit your potential. You are limitless.",
+  "Keep moving forward. It’s the only direction that matters.",
+  "Success is the sum of small efforts, repeated day in and day out.",
+  "The best way out is always through.",
+  "Dreams don’t work unless you do.",
+  "Set your goals high, and don’t stop till you get there.",
+  "You are the artist of your own life. Don’t hand the paintbrush to anyone else.",
+  "Every day may not be good, but there is something good in every day.",
+  "You are stronger than your excuses.",
+  "Fall seven times, stand up eight.",
+  "Your life is as good as your mindset.",
+  "Progress is impossible without change, and those who cannot change their minds cannot change anything.",
+  "Start where you are. Use what you have. Do what you can.",
+  "You don’t need to see the whole staircase, just take the first step.",
+  "Your greatest glory is not in never falling, but in rising every time you fall.",
+  "Stop being afraid of what could go wrong and start focusing on what could go right.",
+  "Work hard, stay consistent, and trust the process.",
+  "You are capable of more than you know.",
+  "Focus on your strengths, not your weaknesses.",
+  "Be a warrior, not a worrier.",
+  "Let your hustle be louder than your fears.",
+  "Keep going because you didn’t come this far just to come this far.",
+  "Small steps in the right direction can turn out to be the biggest step of your life.",
+  "Don’t wait for the perfect moment; take the moment and make it perfect.",
+  "Every day is a chance to be better than yesterday.",
+  "Don’t let your doubts stop you from achieving greatness.",
+  "Your mindset determines your future.",
+  "Don’t quit. Suffer now and live the rest of your life as a champion.",
+  "Be the type of person you want to meet.",
+  "Don’t let others dim your light because they are blinded by your shine.",
+  "Success is built on the foundation of failure.",
+  "The secret of success is consistency of purpose.",
+  "Never let your fears decide your future.",
+  "Push yourself because no one else is going to do it for you.",
+  "Focus on what matters, and let go of what doesn’t.",
+  "Be the hardest worker in the room.",
+  "The pain you feel today will be the strength you feel tomorrow.",
+  "Do not let what you cannot do interfere with what you can do.",
+  "Your only limit is your mind.",
+  "Don’t be discouraged by what you cannot do. Be encouraged by what you can.",
+  "If you want to succeed, focus on changing yourself, not others.",
+  "Learn to rest, not quit.",
+  "Be the energy you want to attract.",
+  "Every moment is a fresh beginning.",
+  "You’re closer than you think.",
+  "The key to success is to start before you’re ready.",
+  "Success is a series of small wins.",
+  "You have the power to say, ‘This is not how my story will end.’",
+  "Success doesn’t happen by chance; it happens by choice.",
+  "The harder you work for something, the more satisfying it is when you achieve it.",
+  "Success is the ability to go from failure to failure without losing enthusiasm.",
+  "Your dreams are valid, no matter how big or small.",
+  "Do not fear failure but rather fear not trying.",
+  "One small positive thought in the morning can change your whole day.",
+  "The journey of a thousand miles begins with a single step.",
+  "Motivation gets you started, but habit keeps you going.",
+  "Do not be afraid to give your best to what seemingly are small jobs.",
+  "Turn your trials into triumphs.",
+  "The sun will rise, and you will try again.",
+  "What we achieve inwardly will change outer reality.",
+  "Happiness is found when you stop comparing yourself to others.",
+  "Don’t just survive—thrive.",
+  "If you don’t sacrifice for what you want, what you want becomes the sacrifice.",
+  "You can’t go back and change the beginning, but you can start where you are and change the ending.",
+  "Be the reason someone smiles today.",
+  "Strength grows in the moments when you think you can’t go on but keep going anyway.",
+  "Don’t be a prisoner of your past. It was just a lesson, not a life sentence.",
+  "Start each day with a positive thought and a grateful heart.",
+  "Don’t look back; you’re not going that way.",
+  "Sometimes you win, and sometimes you learn.",
+  "It’s not the load that breaks you down; it’s the way you carry it.",
+  "Don’t wait for everything to be perfect before you decide to enjoy your life.",
+  "Success is not about how much you have but how much you give.",
+  "Fear is temporary. Regret is forever.",
+  "You are what you do, not what you say you’ll do.",
+  "Don’t let the opinions of others consume you.",
+  "Celebrate every small victory.",
+  "What lies behind us and what lies before us are tiny matters compared to what lies within us.",
+  "Live as if you were to die tomorrow. Learn as if you were to live forever.",
+  "Focus on your goals. Don’t look in any direction but ahead.",
+  "Your life is your message to the world. Make sure it’s inspiring.",
+  "Do not fear mistakes; you will know failure. Continue to reach out.",
+  "Turn your dreams into plans and your plans into reality.",
+  "Never stop learning, because life never stops teaching.",
+  "When life gets tough, remember: you are tougher.",
+  "A negative mind will never give you a positive life.",
+  "Be patient with yourself. Nothing in nature blooms all year.",
+  "You are enough just as you are.",
+  "Happiness comes when we stop complaining about the troubles we have and offer thanks for all the troubles we don’t have.",
+  "Trust yourself. You know more than you think you do.",
+  "Start small, dream big, and work hard.",
+  "A goal without a plan is just a wish.",
+  "When one door closes, another opens.",
+  "Effort equals results. Give it your all.",
+  "Success doesn’t come from comfort zones.",
+  "Think big, work hard, and stay focused.",
+  "Make your dreams happen.",
+  "Persistence is the key to success.",
+  "Life rewards effort, not excuses.",
+  "Take control of your destiny.",
+  "Every day is a chance to write a new story.",
+  "Be proud of your journey.",
+  "Courage starts with showing up and letting yourself be seen.",
+  "You are unstoppable when you believe in yourself.",
+  "Your actions today shape your tomorrow.",
+    "Mistakes are proof that you are trying.",
+  "The best project you’ll ever work on is yourself.",
+  "Success begins at the end of your comfort zone.",
+  "Every expert was once a beginner.",
+  "Don’t let the fear of striking out keep you from playing the game.",
+  "Focus on progress, not perfection.",
+  "The difference between who you are and who you want to be is what you do.",
+  "Let your dreams be your wings.",
+  "Change your thoughts and you change your world.",
+  "Big journeys begin with small steps.",
+  "Sometimes you have to take a leap of faith first.",
+  "Consistency is what transforms average into excellence.",
+  "What you do today can improve all your tomorrows.",
+  "Success is liking yourself, liking what you do, and liking how you do it.",
+  "If you want to be happy, tie it to a goal, not to people or things.",
+  "Focus on what you can control and let go of what you can’t.",
+  "You are more powerful than you think.",
+  "One step at a time is still progress.",
+  "Turn obstacles into opportunities.",
+  "Your story isn’t over yet.",
+  "Inhale courage, exhale doubt.",
+  "Do the best you can until you know better. Then, when you know better, do better.",
+  "Let the beauty of what you love be what you do.",
+  "Today is a good day to try.",
+  "Success is not for the chosen few; it’s for the few who choose.",
+  "Be someone’s light when they are feeling hopeless.",
+  "Remember why you started in the first place.",
+  "Focus on your journey, not someone else’s path.",
+  "Your dreams deserve to come true.",
+  "Every action you take is a vote for the type of person you want to become.",
+  "The mind is everything. What you think, you become.",
+  "What you allow is what will continue.",
+  "When you’re about to give up, remember why you started.",
+  "Success comes to those who are willing to work for it.",
+  "Celebrate your small wins—they lead to big victories.",
+  "Change is hard at first, messy in the middle, and gorgeous at the end.",
+  "A goal properly set is halfway reached.",
+  "Opportunities multiply as they are seized.",
+  "Kindness costs nothing but means everything.",
+  "If you’re persistent, you’ll get it. If you’re consistent, you’ll keep it.",
+  "You are stronger than any storm.",
+  "Don’t let a bad day make you feel like you have a bad life.",
+  "Life becomes easier when you learn to accept apologies you never received.",
+  "Find something you’re passionate about and keep tremendously interested in it.",
+  "Every storm runs out of rain.",
+  "Dreams don’t expire. Keep going.",
+  "The comeback is always stronger than the setback.",
+  "You are allowed to be both a masterpiece and a work in progress.",
+  "A problem is a chance for you to do your best.",
+  "Hustle beats talent when talent doesn’t hustle.",
+  "The power of imagination makes us infinite.",
+  "Don’t overthink. Just begin.",
+  "Be a lamp, a lifeboat, or a ladder.",
+  "The greatest wealth is to live content with little.",
+  "Let go of who you think you’re supposed to be and embrace who you are.",
+  "Success is the progressive realization of a worthy goal.",
+  "Every new day is an opportunity to grow and improve.",
+  "Your vibe attracts your tribe.",
+  "Think less, do more.",
+  "Your energy introduces you before you even speak.",
+  "Fall in love with the process, and the results will come.",
+  "The best revenge is massive success.",
+  "Always deliver more than expected.",
+  "The harder the climb, the better the view.",
+  "No rain, no flowers.",
+  "Don’t fear moving slowly; fear standing still.",
+  "Your growth scares people who don’t want to change.",
+  "Be the one who decided to go for it.",
+  "Stop doubting yourself. Work hard and make it happen.",
+  "Be your own biggest cheerleader.",
+  "Keep chasing your dreams; they know the way.",
+  "The smallest step in the right direction can end up being the biggest step of your life.",
+  "Remember that failure is an event, not a person.",
+  "Everything you are going through is preparing you for what you asked for.",
+  "Make every day your masterpiece.",
+  "You can’t cross the sea merely by standing and staring at the water.",
+  "Live less out of habit and more out of intent.",
+  "Life doesn’t have to be perfect to be wonderful.",
+  "Action is the foundational key to all success.",
+  "Don’t let what you cannot do interfere with what you can do.",
+  "If you believe in yourself enough, you’ll know how to push through anything.",
+  "Every day is a chance to be better.",
+  "Your actions today shape your tomorrow.",
+  "Be courageous and take risks. Nothing can substitute experience.",
+  "When you focus on the good, the good gets better.",
+  "Growth begins at the end of your comfort zone.",
+  "Do something today that scares you.",
+    "The best time to plant a tree was 20 years ago. The second best time is now.","leap"
+];
+
+
+
+        function updateContent() {
+            const now = new Date();
+
+            // Update Date
+            const day = now.getDate();
+            const month = now.toLocaleString('default', { month: 'short' });
+            const year = now.getFullYear();
+            document.getElementById("day").textContent = day;
+            document.getElementById("month").textContent = month;
+            document.getElementById("year").textContent = year;
+
+            // Update Message
+            const yearStart = new Date(now.getFullYear(), 0, 0);
+            const dayOfYear = Math.floor((now - yearStart) / (1000 * 60 * 60 * 24));
+			
+			console.log(dayOfYear)
+			console.log(messages.length)
+			console.log(motivationalQuotes.length)
+            document.getElementById("quote").textContent = messages[dayOfYear-1];
+            document.getElementById("motivation").textContent = motivationalQuotes[dayOfYear];
+        }
+
+        function launchConfetti() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+            });
+        }
+
+        // Run updates and launch confetti on page load
+        updateContent();
+        launchConfetti();
+    </script>
+</body>
+</html>
